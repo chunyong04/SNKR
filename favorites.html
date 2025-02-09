@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SNKR - Favorites</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <div class="logo">SNKR</div>
+      <nav>
+        <ul>
+          <li>
+            <a href="market.html"
+              ><img
+                src="Icons/shopping-bag.png"
+                alt="Shopping Bag Icon"
+                class="icon"
+              />
+              Market</a
+            >
+          </li>
+          <li>
+            <a href="favorites.html"
+              ><img src="Icons/heart.png" alt="Favorites Icon" class="icon" />
+              Favorites</a
+            >
+          </li>
+          <li>
+            <a href="community.html"
+              ><img src="Icons/globe.png" alt="Community Icon" class="icon" />
+              Community</a
+            >
+          </li>
+          <li>
+            <a href="raffles.html"
+              ><img src="Icons/calendar.png" alt="Raffles Icon" class="icon" />
+              Raffles</a
+            >
+          </li>
+          <li>
+            <a href="account.html"
+              ><img src="Icons/user.png" alt="Account Icon" class="icon" />
+              Account</a
+            >
+          </li>
+          <li>
+            <a href="cart.html"
+              ><img src="Icons/cart.png" alt="Cart Icon" class="icon" /> Cart
+              (<span id="cart-count">0</span>)</a
+            >
+          </li>
+        </ul>
+      </nav>
+      <div class="cart-icon" onclick="openCart()">🛒</div>
+    </header>
+
+    <main id="favorites-page" class="favorites-container">
+      <br />
+      <h1>Favorites</h1>
+      <div id="favorites-grid" class="favorites-grid"></div>
+
+      <h1>
+        Add and Save items that you are interested in! Buy at the lowest NOW!!
+      </h1>
+      <p>Explore More</p>
+
+      <div class="product-grid" id="sneaker-list"></div>
+    </main>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const favoritesGrid = document.getElementById("favorites-grid");
+        const sneakerList = document.getElementById("sneaker-list");
+
+        let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+        function displayFavorites() {
+          favoritesGrid.innerHTML = "";
+          if (favorites.length === 0) {
+            favoritesGrid.innerHTML =
+              "<p style='text-align:center;'>No favorites added yet.</p>";
+            return;
+          }
+
+          favorites.forEach((item, index) => {
+            const card = document.createElement("div");
+            card.className = "favorite-card";
+            card.innerHTML = `
+              <img src="${item.image}" alt="${item.name}" />
+              <div class="favorite-info">
+                <h3>${item.name}</h3>
+                <p>${item.price}</p>
+                <button class="remove-fav" data-index="${index}">Remove</button>
+                <button class="add-to-cart">Add to Cart</button>
+              </div>
+            `;
+            favoritesGrid.appendChild(card);
+          });
+        }
+
+        favoritesGrid.addEventListener("click", function (event) {
+          if (event.target.classList.contains("remove-fav")) {
+            const index = event.target.getAttribute("data-index");
+            favorites.splice(index, 1);
+            localStorage.setItem("favorites", JSON.stringify(favorites));
+            displayFavorites();
+          } else if (event.target.classList.contains("add-to-cart")) {
+            const card = event.target.parentElement;
+            const name = card.querySelector("h3").textContent;
+            const price = card.querySelector("p").textContent;
+            const image = card.parentElement.querySelector("img").src;
+
+            const cartItem = { name, price, image };
+            cart.push(cartItem);
+            localStorage.setItem("cart", JSON.stringify(cart));
+            alert(`${name} added to cart.`);
+          }
+        });
+
+        const sneakers = [
+          {
+            name: "Nike Dunk Low",
+            brand: "nike",
+            price: "$150",
+            image: "images/nike-dunk-low.jpg",
+          },
+          {
+            name: "Nike Air Jordan 1",
+            brand: "nike",
+            price: "$200",
+            image: "images/jordan-1.jpg",
+          },
+          {
+            name: "Adidas Yeezy 350 V2",
+            brand: "adidas",
+            price: "$220",
+            image: "images/yeezy-350.jpg",
+          },
+          {
+            name: "Adidas Superstar",
+            brand: "adidas",
+            price: "$110",
+            image: "images/superstar.jpg",
+          },
+          {
+            name: "Puma RS-X",
+            brand: "puma",
+            price: "$140",
+            image: "images/puma-rsx.jpg",
+          },
+        ];
+
+        sneakers.forEach((sneaker) => {
+          const card = document.createElement("div");
+          card.className = "product-card";
+          card.innerHTML = `
+            <span class="price">${sneaker.price}</span>
+            <img src="${sneaker.image}" alt="${sneaker.name}">
+            <div class="product-name">${sneaker.name}</div>
+            <button class="add-to-favorites explore-fav-btn">Add to Favorites</button>
+            <button class="add-to-cart">Add to Cart</button>
+          `;
+          sneakerList.appendChild(card);
+        });
+
+        sneakerList.addEventListener("click", function (event) {
+          if (event.target.classList.contains("add-to-favorites")) {
+            const card = event.target.parentElement;
+            const name = card.querySelector(".product-name").textContent;
+            const priceText = card.querySelector(".price")?.textContent || "$0";
+            const price = parseFloat(priceText.replace(/[^0-9.]/g, ""));
+            const image = card.querySelector("img").src;
+
+            const favoriteItem = { name, price, image };
+            if (!favorites.some((item) => item.name === name)) {
+              favorites.push(favoriteItem);
+              localStorage.setItem("favorites", JSON.stringify(favorites));
+              displayFavorites();
+            } else {
+              alert("This item is already in your favorites.");
+            }
+          } else if (event.target.classList.contains("add-to-cart")) {
+            const card = event.target.parentElement;
+            const name = card.querySelector(".product-name").textContent;
+            const priceText = card.querySelector(".price")?.textContent || "$0";
+            const price = parseFloat(priceText.replace(/[^0-9.]/g, ""));
+            const image = card.querySelector("img").src;
+
+            const cartItem = { name, price, image };
+            cart.push(cartItem);
+            localStorage.setItem("cart", JSON.stringify(cart));
+            alert(`${name} added to cart.`);
+          }
+        });
+
+        displayFavorites();
+      });
+    </script>
+  </body>
+</html>
