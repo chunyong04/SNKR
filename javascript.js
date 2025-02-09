@@ -70,15 +70,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
   displaySneakers("all");
 
-  window.filterSneakers = function (brand) {
-    displaySneakers(brand);
-    document
-      .querySelectorAll(".filter-buttons button")
-      .forEach((btn) => btn.classList.remove("active"));
-    document
-      .querySelector(`[onclick="filterSneakers('${brand}')"]`)
-      .classList.add("active");
-  };
+if (document.querySelector(".filter-buttons")) {
+  document
+    .querySelectorAll(".filter-buttons button")
+    .forEach((btn) => btn.classList.remove("active"));
+
+  //Check if the element exists before trying to change the class
+  const element = document.querySelector(`[onclick="filterSneakers('${brand}')"]`);
+
+  if(element){
+    element.classList.add("active");
+  }
+}
 });
 
 function filterProducts(brand) {
