@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SNKR - Index</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <div class="logo">SNKR</div>
+      <nav>
+        <ul>
+          <li>
+            <a href="market.html"
+              ><img
+                src="Icons/shopping-bag.png"
+                alt="Shopping Bag Icon"
+                class="icon"
+              />
+              Market</a
+            >
+          </li>
+          <li>
+            <a href="favorites.html"
+              ><img src="Icons/heart.png" alt="Favorites Icon" class="icon" />
+              Favorites</a
+            >
+          </li>
+          <li>
+            <a href="community.html"
+              ><img src="Icons/globe.png" alt="Community Icon" class="icon" />
+              Community</a
+            >
+          </li>
+          <li>
+            <a href="raffles.html"
+              ><img src="Icons/calendar.png" alt="Raffles Icon" class="icon" />
+              Raffles</a
+            >
+          </li>
+          <li>
+            <a href="account.html"
+              ><img src="Icons/user.png" alt="Account Icon" class="icon" />
+              Account</a
+            >
+          </li>
+          <li>
+            <a href="cart.html"
+              ><img src="Icons/cart.png" alt="Cart Icon" class="icon" /> Cart
+              (<span id="cart-count">0</span>)</a
+            >
+          </li>
+        </ul>
+      </nav>
+      <div class="cart-icon" onclick="openCart()">🛒</div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <h1>Step Up Your Game</h1>
+      <p>Discover the latest drops and hottest sneakers.</p>
+      <a href="market.html" class="btn">Shop Now</a>
+    </section>
+
+    <!-- Featured Sneakers -->
+    <section class="featured">
+      <h2>Featured Sneakers</h2>
+      <div class="sneaker-grid">
+        <div class="sneaker">
+          <img src="images/jordan-1.jpg" alt="Nike Air Jordan" />
+          <p>Nike Air Jordan 1</p>
+          <span>$180</span>
+        </div>
+        <div class="sneaker">
+          <img src="images/yeezy-350.jpg" alt="Adidas Yeezy" />
+          <p>Adidas Yeezy 350</p>
+          <span>$220</span>
+        </div>
+        <div class="sneaker">
+          <img src="images/puma_suede.jpg" alt="Puma Suede" />
+          <p>Puma Suede Classic</p>
+          <span>$110</span>
+        </div>
+      </div>
+    </section>
+
+    <script src="javascript.js"></script>
+    <script>
+      window.location.href = "login.html";
+    </script>
+  </body>
+</html>

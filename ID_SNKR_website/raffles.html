@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SNKR - Raffles</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <div class="logo">SNKR</div>
+      <nav>
+        <ul>
+          <li>
+            <a href="market.html"
+              ><img
+                src="Icons/shopping-bag.png"
+                alt="Shopping Bag Icon"
+                class="icon"
+              />
+              Market</a
+            >
+          </li>
+          <li>
+            <a href="favorites.html"
+              ><img src="Icons/heart.png" alt="Favorites Icon" class="icon" />
+              Favorites</a
+            >
+          </li>
+          <li>
+            <a href="community.html"
+              ><img src="Icons/globe.png" alt="Community Icon" class="icon" />
+              Community</a
+            >
+          </li>
+          <li>
+            <a href="raffles.html"
+              ><img src="Icons/calendar.png" alt="Raffles Icon" class="icon" />
+              Raffles</a
+            >
+          </li>
+          <li>
+            <a href="account.html"
+              ><img src="Icons/user.png" alt="Account Icon" class="icon" />
+              Account</a
+            >
+          </li>
+          <li>
+            <a href="cart.html"
+              ><img src="Icons/cart.png" alt="Cart Icon" class="icon" /> Cart
+              (<span id="cart-count">0</span>)</a
+            >
+          </li>
+        </ul>
+      </nav>
+      <div class="cart-icon" onclick="openCart()">🛒</div>
+    </header>
+
+    <main class="raffles-container">
+      <h1>Limited Edition Raffles</h1>
+
+      <div class="raffle-buttons-container">
+        <button class="raffle-button">Raffles</button>
+        <button class="raffle-button">Coming Soon</button>
+      </div>
+
+      <div class="raffle-list" id="raffle-list"></div>
+    </main>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const raffleList = document.getElementById("raffle-list");
+
+        console.log(raffleList);
+
+        const raffles = [
+          {
+            name: "Nike Air Jordan 1 Retro High",
+            image: "images/air-jordan-1-retro-high-og-shoes.png",
+            date: "Closes: Feb 12, 2025",
+            price: "$300",
+          },
+          {
+            name: "Supreme X Nike Dunk Low",
+            image: "images/raffles-sneaker-nike-dunk-low.png",
+            date: "Closes: Feb 15, 2025",
+            price: "$180",
+          },
+          {
+            name: "Nike SB Dunk Low 'StrangeLove'",
+            image: "images/Raffles-sneaker-nike-dunk-2.png",
+            date: "Closes: Feb 18, 2025",
+            price: "$180",
+          },
+          {
+            name: "Nike AirForce 1 'Fossil Stone'",
+            image: "images/Raffles-sneaker-nike-dunk-3.png",
+            date: "Closes: Feb 20, 2025",
+            price: "$150",
+          },
+          {
+            name: "Nike AirJordan 3",
+            image: "images/Raffles-sneaker-nike-dunk-4.png",
+            date: "Closes: Feb 22, 2025",
+            price: "$150",
+          },
+          {
+            name: "Asics SkyHand OG",
+            image: "images/Raffles-sneaker-nike-dunk-5.jpg",
+            date: "Closes: Feb 24, 2025",
+            price: "$200",
+          },
+          {
+            name: "Nike Dunk Low KASINA",
+            image: "images/Raffles-sneaker-nike-dunk-6.png",
+            date: "Closes: Feb 26, 2025",
+            price: "$180",
+          },
+          {
+            name: "Nike Dunk High",
+            image: "images/Raffles-sneaker-nike-dunk-7.png",
+            date: "Closes: Feb 28, 2025",
+            price: "$150",
+          },
+          {
+            name: "Nike Dunk High 'Urban Tiger",
+            image: "images/Raffles-sneaker-nike-dunk-8.png",
+            date: "Closes: Feb 29, 2025",
+            price: "$170",
+          },
+        ];
+
+        raffles.forEach((raffle) => {
+          const card = document.createElement("div");
+          card.className = "product-card";
+          card.innerHTML = `
+          <div class="sneaker-title">${raffle.name}</div>
+       <img src="${raffle.image}" alt="${raffle.name}">
+            <div class="sneaker-details">
+  <div class="sneaker-date">${raffle.date}</div>
+  <span class="sneaker-price">${raffle.price}</span>
+</div>
+
+          `;
+          raffleList.appendChild(card);
+        });
+      });
+    </script>
+
+    <script src="javascript.js"></script>
+  </body>
+</html>
